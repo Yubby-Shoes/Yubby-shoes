@@ -29,7 +29,7 @@ class Product(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     in_stock = models.IntegerField(default=0)
-    product_model = models.CharField(max_length=10, min_length=4, unique=True)
+    product_model = models.CharField(max_length=10, unique=True)
 
     def __str__(self):
         return self.product_model + '-' + self.name
