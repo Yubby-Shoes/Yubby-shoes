@@ -1,6 +1,10 @@
-# from django.urls import path
-# from .views import store, buy
+from django.urls import path
+from .views import Create, List
 
-# urlpatterns = [
-#     path('', store, name='store'),
-# ]
+app_name = 'store'
+
+urlpatterns = [
+    # path('', store, name='store'),
+    path('create/', Create.as_view(), name="create"),
+    path('list/', List.as_view(), name="list")
+]

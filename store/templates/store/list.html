@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Product Info List</title>
+    <style>
+      table {
+        width: 100%;
+      }
+
+      td,
+      th {
+        padding: 8px;
+      }
+
+      tr:nth-child(even) {
+        background: #bdb7b7;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>List of all Products</h1>
+    <h2>
+      <a href="{% url 'store:create' %}">Create</a>
+    </h2>
+
+    <table>
+      <tr>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Product Model</th>
+        <th>Action</th>
+      </tr>
+      {% for u in data %}
+      <tr>
+        <td>{{ u.name }}</td>
+        <td>{{ u.price }}</td>
+        <td>{{ u.product_model}}</td>
+        <td>
+          <a href="{% url 'crud:detail' u.id %}">Detail</a> /
+
+          <a href="/crud/update/{{ u.id }}/">Update</a> /
+          <a href="/crud/delete/{{ u.id }}/">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
