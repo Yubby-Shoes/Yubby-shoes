@@ -25,7 +25,8 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     price = models.FloatField(default=0.00)
     discounted_price = models.FloatField(null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True,
+                              upload_to='media/products')
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     in_stock = models.IntegerField(default=0)
