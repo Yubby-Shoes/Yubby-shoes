@@ -7,7 +7,7 @@ class Login(LoginView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('')
+            return redirect('store:list')
         return self.render_to_response(self.get_context_data())
 
     def get_success_url(self):

@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from .forms import ProductInfoModelForm
 from .models import Product
-
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # @login_required()
 # def products_view(request):
 #     # this context is passed for statusapp
@@ -14,12 +15,14 @@ from .models import Product
 #     })
 
 
+@method_decorator(login_required, name='dispatch')
 class List(ListView):
     template_name = 'store/list.html'
     model = Product
     context_object_name = 'data'
 
 
+@method_decorator(login_required, name='dispatch')
 class Create(CreateView):
     form_class = ProductInfoModelForm
     template_name = 'store/create.html'
@@ -28,12 +31,14 @@ class Create(CreateView):
         return reverse('store:list')
 
 
+@method_decorator(login_required, name='dispatch')
 class Detail(DetailView):
     template_name = 'store/detail.html'
     context_object_name = 'user_obj'
     model = Product
 
 
+@method_decorator(login_required, name='dispatch')
 class Update(UpdateView):
     form_class = ProductInfoModelForm
     model = Product
@@ -43,6 +48,7 @@ class Update(UpdateView):
         return reverse('store:list')
 
 
+@method_decorator(login_required, name='dispatch')
 class Delete(DeleteView):
     model = Product
 
