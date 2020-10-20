@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Create Product</title>
-  </head>
-  <body>
-    <h1>Create a new Product</h1>
-    <form method="post">
-      {% csrf_token %} {{ form.as_p }}
-      <button type="submit">Submit</button>
-    </form>
-  </body>
-</html>
+{% extends "base.html" %} {% block content %}
+
+<h1>Create a new Product</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

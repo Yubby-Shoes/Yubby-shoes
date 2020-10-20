@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Detail</title>
-  </head>
-  <body>
-    <h1>Detail of Product</h1>
+{% extends "base.html" %} {% block content %}
 
-    Name: {{ user_obj.name }} <br />
+<h1>Detail of Product</h1>
 
-    Price :{{ user_obj.price }} <br />
+Name: {{ user_obj.name }} <br />
 
-    Discounted_price :{{ user_obj.discounted_price }} <br />
+Price :{{ user_obj.price }} <br />
 
-    Date :{{ user_obj.date_modified }} <br />
+Discounted_price :{{ user_obj.discounted_price }} <br />
 
-    Model :{{ user_obj.product_model }} <br />
-  </body>
-</html>
+Date :{{ user_obj.date_modified }} <br />
+
+Model :{{ user_obj.product_model }} <br />
+
+{% endblock %}
