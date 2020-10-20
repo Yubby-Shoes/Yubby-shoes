@@ -1,6 +1,6 @@
 from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DetailView
 from .forms import ProductInfoModelForm
 from .models import Product
 
@@ -26,3 +26,8 @@ class Create(CreateView):
 
     def get_success_url(self):
         return reverse('store:list')
+
+
+class Detail(DetailView):
+    template_name = 'store/detail.html'
+    context_object_name = 'user_obj'

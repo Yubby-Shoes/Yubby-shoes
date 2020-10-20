@@ -37,10 +37,9 @@
         <td>{{ u.price }}</td>
         <td>{{ u.product_model}}</td>
         <td>
-          <a href="{% url 'crud:detail' u.id %}">Detail</a> /
-
-          <a href="/crud/update/{{ u.id }}/">Update</a> /
-          <a href="/crud/delete/{{ u.id }}/">Delete</a>
+          <a href="{% url 'store:detail' u.id %}">Detail</a> /
+          <a href="#">Update</a> /
+          <a href="#">Delete</a>
         </td>
       </tr>
       {% endfor %}
