@@ -38,8 +38,17 @@
         <td>{{ u.product_model}}</td>
         <td>
           <a href="{% url 'store:detail' u.id %}">Detail</a> /
-          <a href="#">Update</a> /
-          <a href="#">Delete</a>
+          <a href="{% url 'store:update' u.id %}">Update</a> /
+          <form
+            action="/store/delete/{{ u.id }}/"
+            method="post"
+            id="formdelete"
+          >
+            {% csrf_token %}
+            <a href="#" onclick="document.getElementById('formdelete').submit()"
+              >Delete</a
+            >
+          </form>
         </td>
       </tr>
       {% endfor %}
