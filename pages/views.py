@@ -31,7 +31,8 @@ def shop(request):
         page_no = request.GET.get('page', 1)
         paginated_products = p.get_page(page_no)
         return render(request, 'shop.html', context={
-            'products': paginated_products
+            'products': paginated_products,
+            'categories': get_categories()
         })
     return HttpResponseNotAllowed('Methods Other than get not allowed!')
 
