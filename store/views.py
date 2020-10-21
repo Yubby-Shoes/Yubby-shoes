@@ -54,3 +54,10 @@ class Delete(DeleteView):
 
     def get_success_url(self):
         return reverse('store:list')
+
+
+@method_decorator(login_required)
+def filter_products_bycategory(request, category):
+    products = Product.objects.filter(
+        category__category_name__contains=category)
+    return render()
