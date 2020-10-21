@@ -31,6 +31,8 @@ class Product(models.Model):
     date_modified = models.DateTimeField(auto_now=True)
     in_stock = models.IntegerField(default=0)
     product_model = models.CharField(max_length=10, unique=True)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.product_model + '-' + self.name
