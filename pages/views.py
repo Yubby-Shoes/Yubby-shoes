@@ -27,6 +27,13 @@ def index(request):
 def shop(request):
     if request.method == 'GET':
         products = Product.objects.all().order_by('-date_added')
+        cg = request.GET.get('category')
+
+        if cg:
+            category = get_object_or_404(Category, pk=cg)
+            products = category.product_set.all().order_by('-date_added')
+            # print(products)
+
         p = Paginator(products, 9)
         page_no = request.GET.get('page', 1)
         paginated_products = p.get_page(page_no)
