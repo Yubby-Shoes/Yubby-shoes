@@ -1,4 +1,5 @@
 {% extends 'page_base.html' %}
+{% load to_str %}
 
 {% block content %}
 
@@ -14,7 +15,7 @@
     <li class="breadcrumb-item">
       <a href="index.html">Home</a>
     </li>
-    <li class="breadcrumb-item active">Single Page</li>
+    <li class="breadcrumb-item active">Shop</li>
   </ol>
   <!---->
   <!-- banner -->
@@ -42,9 +43,16 @@
             </h3>
             <ul class="w3layouts-box-list">
               {% for category in categories %}
-              <li>
-                <input type="checkbox" class="checked">
-                <span class="span">{{ category.category_name }}</span>
+              <li
+
+              >
+                <a href="{% url 'pages:shop' %}?category={{ category.id }}"
+                    {% if category.id|to_str != request.GET.category %}
+                      class="text-muted"
+                    {% endif %}
+                >
+                  <span class="span text-capitalize">{{ category.category_name }}</span>
+                </a>
               </li>
               {% endfor %}
 
@@ -101,7 +109,7 @@
                           disabled
                         {% endif %}"
                     {% if products.has_previous %}
-                   href="{% url 'pages:shop' %}?page={{ products.previous_page_number }}"
+                   href="{% url 'pages:shop' %}?page={{ products.previous_page_number }}&&category={{ request.GET.category }}"
                     {% endif %}
                 >Previous</a>
                 <a class="btn text-white btn-primary
@@ -109,7 +117,8 @@
                           disabled
                         {% endif %}"
                     {% if products.has_next %}
-                   href="{% url 'pages:shop' %}?page={{ products.next_page_number }}"
+                   href="{% url 'pages:shop' %}?page=
+{{ products.next_page_number }}&&category={{ request.GET.category }}"
                     {% endif %}
                 >Next</a>
               </div>
