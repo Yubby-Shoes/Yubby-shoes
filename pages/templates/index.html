@@ -109,6 +109,17 @@
 </section>
 <!-- //ab -->
 <!--/ab -->
+  <section class="container bg-grey border p-3">
+    <h3 class="mb-3 text-uppercase border-bottom">Categories</h3>
+    <ul class="d-flex py-0">
+      {% for category in categories %}
+        <li class="d-block py-2 px-3 border-right">
+        <a href="#" class="text-capitalize" id="underline-link"
+        >{{ category.category_name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
 <section class="about py-5">
   <div class="container pb-lg-3">
     <h3 class="tittle text-center">New Arrivals</h3>

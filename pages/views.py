@@ -18,7 +18,8 @@ def index(request):
         products = Product.objects.all().order_by('-date_added')[:9]
         # print('products=', len(products))
         context = {
-            'products': products
+            'products': products,
+            'categories': get_categories()
         }
         return render(request, 'index.html', context=context)
     return HttpResponseNotAllowed('Methods Other than get not allowed!')
