@@ -21,7 +21,7 @@ def index(request):
             'products': products,
             'categories': get_categories()
         }
-        return render(request, 'index.html', context=context)
+        return render(request, 'pages/index.html', context=context)
     return HttpResponseNotAllowed('Methods Other than get not allowed!')
 
 
@@ -38,7 +38,7 @@ def shop(request):
         p = Paginator(products, 9)
         page_no = request.GET.get('page', 1)
         paginated_products = p.get_page(page_no)
-        return render(request, 'shop.html', context={
+        return render(request, 'pages/shop.html', context={
             'products': paginated_products,
             'categories': get_categories()
         })
@@ -56,17 +56,17 @@ def item_detail(request, pk):
             'featured_products': products[start_item: start_item+3],
             'categories': get_categories()
         }
-        return render(request, 'shop-single.html', context=context)
+        return render(request, 'pages/shop-single.html', context=context)
     return HttpResponseNotAllowed('Methods Other than get not allowed!')
 
 
 def about(request):
-    return render(request, 'about.html', context={})
+    return render(request, 'pages/about.html', context={})
 
 
 def blog(request):
-    return render(request, 'blog.html', context={})
+    return render(request, 'pages/blog.html', context={})
 
 
 def contact(request):
-    return render(request, 'contact.html', context={})
+    return render(request, 'pages/contact.html', context={})
