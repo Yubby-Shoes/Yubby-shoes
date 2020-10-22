@@ -64,8 +64,8 @@ def about(request):
     return render(request, 'pages/about.html', context={})
 
 
-def blog(request):
-    return render(request, 'pages/blog.html', context={})
+def buy(request, pk):
+    return render(request, 'pages/buy.html', context={})
 
 
 def contact(request):
