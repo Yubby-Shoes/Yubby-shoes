@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseNotAllowed, Http404
 from django.core.paginator import Paginator
 from store.models import *
+from .forms import UserDetailForm
 
 
 def get_categories():
@@ -65,7 +66,17 @@ def about(request):
 
 
 def buy(request, pk):
-    return render(request, 'pages/buy.html', context={})
+    buy_detail_form = UserDetailForm()
+    product = get_object_or_404(Product, pk=pk)
+    # print(product)
+    if request.method == 'POST':
+        buy_detail_form = UserDetailForm(request.POST)
+        if buy_detail_form.is_valid():
+            print(buy_detail_form.cleaned_data)
+    return render(request, 'pages/buy.html', context={
+        'buy_detail_form': buy_detail_form,
+        'product': product
+    })
 
 
 def contact(request):
