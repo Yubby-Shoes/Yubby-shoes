@@ -1,0 +1,141 @@
+{% extends 'pages/page_base.html' %}
+{% load to_str %}
+
+{% block content %}
+
+
+  <!-- mian-content -->
+  <div class="main-banner inner" id="home">
+    {% include 'pages/utils/nav.html' %}
+
+  </div>
+  <!--//main-content-->
+  <!---->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="index.html">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Shop</li>
+  </ol>
+  <!---->
+  <!-- banner -->
+  <section class="ab-info-main py-md-5 py-4">
+    <div class="container py-md-3">
+      <!-- top Products -->
+      <div class="row">
+        <!-- product left -->
+        <div class="side-bar col-lg-3">
+
+{#          <div class="search-bar w3layouts-newsletter">#}
+{#            <h3 class="sear-head">Search Here..</h3>#}
+{#            <form action="#" method="post" class="d-flex">#}
+{#              <input type="search" placeholder="Product name..." name="search"#}
+{#                     class="form-control" required="">#}
+{#              <button class="btn1"><span class="fa fa-search"#}
+{#                                         aria-hidden="true"></span></button>#}
+{#            </form>#}
+{#          </div>#}
+          <!--preference -->
+          <div class="left-side my-4">
+            <h3 class="sear-head d-flex justify-content-between">
+              <span>Categories</span>
+              <span class="text-muted">Filter</span>
+            </h3>
+            <ul class="w3layouts-box-list">
+              {% for category in categories %}
+              <li
+
+              >
+                <a href="{% url 'pages:shop' %}?category={{ category.id }}"
+                    {% if category.id|to_str != request.GET.category %}
+                      class="text-muted"
+                    {% endif %}
+                >
+                  <span class="span text-capitalize">{{ category.category_name }}</span>
+                </a>
+              </li>
+              {% endfor %}
+
+            </ul>
+          </div>
+          <!-- // preference -->
+
+
+        </div>
+        <!-- //product left -->
+        <!-- product right -->
+        <div class="left-ads-display col-lg-9">
+          <div class="row">
+            {% for product in products %}
+              <div class="col-md-4 product-men">
+                <div class="product-shoe-info shoe text-center">
+                  <div class="men-thumb-item">
+                    {% if product.image %}
+                      <img src='{{ product.image.url }}' class="img-fluid"
+                           alt="">
+                    {% endif %}
+                  </div>
+                  <div class="item-info-product">
+                    <h4>
+                      <a href="shop-single.html">{{ product.name }}</a>
+                    </h4>
+
+                    <div class="product_price">
+                      <div class="grid-price">
+                        <span class="money">${{ product.price }}</span>
+                      </div>
+                    </div>
+                    <ul class="stars">
+                      <li><a href="#"><span class="fa fa-star"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star-half-o"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star-half-o"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star-o"
+                                            aria-hidden="true"></span></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="col-md-4 offset-md-8">
+              <!-- pagination -->
+              <div class="btn-group mt-3 float-right">
+                <a class="btn text-white btn-primary
+                        {% if not products.has_previous %}
+                          disabled
+                        {% endif %}"
+                    {% if products.has_previous %}
+                   href="{% url 'pages:shop' %}?page={{ products.previous_page_number }}&&category={{ request.GET.category }}"
+                    {% endif %}
+                >Previous</a>
+                <a class="btn text-white btn-primary
+                        {% if not products.has_next %}
+                          disabled
+                        {% endif %}"
+                    {% if products.has_next %}
+                   href="{% url 'pages:shop' %}?page=
+{{ products.next_page_number }}&&category={{ request.GET.category }}"
+                    {% endif %}
+                >Next</a>
+              </div>
+              {#            <p><span class="text-muted align-self-center">Page {{ products.number }} of#}
+              {#                {{ products.paginator.num_pages }}</span></p>#}
+              <!-- // pagination -->
+            </div>
+          </div>
+          <div class="grid-img-right mt-4 text-right">
+            <span class="money">Flat 50% Off</span>
+            <a href="shop-single.html" class="btn">Shop Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- //contact -->
+  {% include 'pages/utils/footer.html' %}
+
+{% endblock content %}

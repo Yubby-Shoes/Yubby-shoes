@@ -1,0 +1,65 @@
+{% extends 'pages/page_base.html' %}
+
+{% block content %}
+  <!-- mian-content -->
+  <div class="main-banner inner" id="home">
+    {% include 'pages/utils/nav.html' %}
+  </div>
+  <!--//main-content-->
+  <!---->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="index.html">Home</a>
+    </li>
+    <li class="breadcrumb-item active">Buy Item</li>
+  </ol>
+  <!---->
+  <!--// mian-content -->
+  <!-- banner -->
+  <section class="ab-info-main py-5">
+    <div class="container py-3">
+      <h3 class="tittle text-center">Item Details</h3>
+      <div class="row mx-auto mb-5">
+        <div class="desc1-left col-md-4 offset-md-2">
+          <img src='{{ product.image.url }}' class="img-fluid"
+               alt="">
+        </div>
+        <div class="desc1-right col-md-5 pl-lg-5">
+          <h3 class="text-uppercase">{{ product.name }}</h3>
+          <h5>Rs. {{ product.price }} <span>
+                              {% if product.discounted_price %}
+                                {{ product.discounted_price }}
+                              {% endif %}
+                            </span></h5>
+          <div class="available mt-3">
+            <span><a href="#">login to save in wishlist </a></span>
+            <p>Lorem Ipsum has been the industry's standard since the 1500s.
+              Praesent ullamcorper dui turpis.. </p>
+          </div>
+
+        </div>
+      </div>
+      <h3 class="tittle text-center"><span class="sub-tittle">Contact
+              Us</span> Fill Details</h3>
+      <div class="row contact-main-info mt-5">
+        <div class="col-md-6 contact-right-content mx-auto">
+          <form action="{% url 'pages:buy' product.id %}" method="post">
+            {% csrf_token %}
+            {% for field in buy_detail_form %}
+              {{ field.errors }}
+              {{ field }}
+            {% endfor %}
+            <div class="read mt-3">
+              <input type="submit" value="Submit">
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- //contact -->
+  {% include 'pages/utils/footer.html' %}
+{% endblock content %}
