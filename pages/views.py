@@ -72,7 +72,8 @@ def buy(request, pk):
     if request.method == 'POST':
         buy_detail_form = UserDetailForm(request.POST)
         if buy_detail_form.is_valid():
-            print(buy_detail_form.cleaned_data)
+            buy_detail_form.save(pk)
+            buy_detail_form = UserDetailForm()
     return render(request, 'pages/buy.html', context={
         'buy_detail_form': buy_detail_form,
         'product': product
