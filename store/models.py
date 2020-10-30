@@ -38,3 +38,25 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_model + '-' + self.name
+
+
+class OrderItem(models.Model):
+    STATUS_CHOICES = (
+        ('PR', 'Processing'),
+        ('SH', 'Shipping'),
+        ('DE', 'Delivered'),
+    )
+    ordered_on = models.DateTimeField(auto_now_add=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                related_name='orders')
+    order_name = models.CharField(max_length=255)
+    order_address = models.CharField(max_length=255)
+    order_email = models.CharField(max_length=255, blank=True, null=True)
+    order_phone = models.CharField(max_length=14)
+    order_quantity = models.IntegerField()
+    order_status = models.CharField(max_length=3, choices=STATUS_CHOICES,
+                                    default='PR')
+
+    def __str__(self):
+        return f"{self.order_name}-{self.product.name}"
+
