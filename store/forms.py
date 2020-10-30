@@ -7,4 +7,4 @@ class ProductInfoModelForm(ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'discounted_price',
-                  'image', 'in_stock', 'product_model']
+                  'image', 'in_stock', 'product_model', 'category', 'company']
