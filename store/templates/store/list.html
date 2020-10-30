@@ -51,7 +51,22 @@
   </tr>
   {% endfor %}
 </table> -->
-
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'store:filter' 'All'  %}">All</a>
+  </li>
+  {% for cat in category %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'store:filter' cat %}"> {{cat}}</a>
+  </li>
+  {%endfor%}
+  <!-- <li class="nav-item">
+    <a class="nav-link" href="{% url 'store:filter' 'Nike' %}">{{cat}}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li> -->
+</ul>
 <table class="table table-striped">
   <thead>
     <tr>

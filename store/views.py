@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 from .forms import ProductInfoModelForm
-from .models import Product
+from .models import Product, Category
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 # @login_required()
@@ -15,11 +15,11 @@ from django.utils.decorators import method_decorator
 #     })
 
 
-@method_decorator(login_required, name='dispatch')
-class List(ListView):
-    template_name = 'store/list.html'
-    model = Product
-    context_object_name = 'data'
+# @method_decorator(login_required, name='dispatch')
+# class List(ListView):
+#     template_name = 'store/list.html'
+#     model = Product
+#     context_object_name = 'data'
 
 
 @method_decorator(login_required, name='dispatch')
@@ -28,7 +28,7 @@ class Create(CreateView):
     template_name = 'store/create.html'
 
     def get_success_url(self):
-        return reverse('store:list')
+        return reverse('store:filter', args=['All'])
 
 
 @method_decorator(login_required, name='dispatch')
@@ -45,7 +45,7 @@ class Update(UpdateView):
     template_name = 'store/update.html'
 
     def get_success_url(self):
-        return reverse('store:list')
+        return reverse('store:filter', args=['All'])
 
 
 @method_decorator(login_required, name='dispatch')
@@ -53,11 +53,17 @@ class Delete(DeleteView):
     model = Product
 
     def get_success_url(self):
-        return reverse('store:list')
+        return reverse('store:filter', args=['All'])
 
 
-@method_decorator(login_required)
+@login_required()
 def filter_products_bycategory(request, category):
-    products = Product.objects.filter(
-        category__category_name__contains=category)
-    return render()
+    if (category == 'All'):
+        products = Product.objects.all()
+    else:
+        products = Product.objects.filter(
+            category__category_name__contains=category)
+    return render(request, 'store/list.html', context={
+        'data': products,
+        "category": Category.objects.all()
+    })
