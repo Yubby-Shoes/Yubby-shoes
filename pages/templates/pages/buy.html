@@ -32,7 +32,11 @@
                               {% endif %}
                             </span></h5>
           <div class="available mt-3">
-            <span><a href="#">login to save in wishlist </a></span>
+            <span>{% if product.in_stock > 0 %}
+              In Stock: {{ product.in_stock }}
+            {% else %}
+              <strong>Out of Stock</strong>
+            {% endif %}</span>
             <p>Lorem Ipsum has been the industry's standard since the 1500s.
               Praesent ullamcorper dui turpis.. </p>
           </div>
