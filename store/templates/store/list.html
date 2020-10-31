@@ -28,15 +28,20 @@
   </thead>
   {% for u in data %}
   <tbody>
-    <tr>
+    <tr class="align-items-center">
       <th scope="row">{{ u.id }}</th>
-      <td>{{ u.name }}</td>
+      <td><img src="{{ u.image.url }}" alt="product_image"
+               class="rounded-circle mr-2"
+               height="30"
+               width="30"
+      >{{ u.name }}</td>
       <td>{{ u.price }}</td>
       <td>{{ u.product_model}}</td>
       <td>
         <a href="{% url 'store:detail' u.id %}">Detail</a> /
         <a href="{% url 'store:update' u.id %}">Update</a> /
-        <form action="/store/delete/{{ u.id }}/" method="post" id="formdelete">
+        <form action="/store/delete/{{ u.id }}/" class="d-inline-block"
+              method="post" id="formdelete">
           {% csrf_token %}
           <a href="#" onclick="document.getElementById('formdelete').submit()"
             >Delete</a

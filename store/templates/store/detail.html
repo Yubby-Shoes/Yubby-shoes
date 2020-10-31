@@ -1,16 +1,62 @@
 {% extends "store/store-base.html" %}
+{% load static %}
+
 {% block main-content %}
+  <div class="container-fluid">
+    <div class="col-12 col-md-6 offset-2">
+      <h6>Detail</h6>
+      <div>
+        <img src="{{ product.image.url }}" alt="" class="w-50">
+      </div>
+      <h3 class="text-success">{{ product.name }}</h3>
 
-<h1>Detail of Product</h1>
+      <p>Price :{{ product.price }}</p>
+      {% if product.discounted_price %}
+        Discounted_price :{{ product.discounted_price }}
+      {% endif %}
 
-Name: {{ user_obj.name }} <br />
+      <p>Date :{{ product.date_modified }}</p>
 
-Price :{{ user_obj.price }} <br />
+      <p>Model :{{ product.product_model }}</p>
+      <div class="btn-group">
 
-Discounted_price :{{ user_obj.discounted_price }} <br />
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-toggle="modal"
+                data-target="#exampleModal">
+          Delete
+        </button>
 
-Date :{{ user_obj.date_modified }} <br />
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                Are you sure you want to delete?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close
+                </button>
+                <a href="{% url 'store:delete' product.id %}" class="btn
+      btn-danger">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-Model :{{ user_obj.product_model }} <br />
+        <a href="{% url 'store:update' product.id %}" class="btn
+      btn-success">Update</a>
+      </div>
+    </div>
 
+
+  </div>
 {% endblock %}
