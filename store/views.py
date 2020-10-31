@@ -58,7 +58,7 @@ class Delete(DeleteView):
 
 @login_required()
 def filter_products_bycategory(request, category):
-    if (category == 'All'):
+    if category == 'All':
         products = Product.objects.all()
     else:
         products = Product.objects.filter(
