@@ -1,71 +1,20 @@
-{% extends "base.html" %}
-<!-- {% block styles %}
-<style>
-  table {
-    width: 100%;
-  }
+{% extends "store/store-base.html" %}
 
-  td,
-  th {
-    padding: 8px;
-  }
-
-  tr:nth-child(even) {
-    background: #bdb7b7;
-  }
-</style>
-{% endblock%} -->
-{% block content %}
-
+{% block main-content %}
 <h1>List of all Products</h1>
-<h2>
-  <a href="{% url 'store:create' %}">Create</a>
-</h2>
 
-<h2>
-  <a href="{% url 'accounts:logout' %}">Logout</a>
-</h2>
 
-<!-- <table>
-  <tr>
-    <th>Product Name</th>
-    <th>Price</th>
-    <th>Product Model</th>
-    <th>Action</th>
-  </tr>
-  {% for u in data %}
-  <tr>
-    <td>{{ u.name }}</td>
-    <td>{{ u.price }}</td>
-    <td>{{ u.product_model}}</td>
-    <td>
-      <a href="{% url 'store:detail' u.id %}">Detail</a> /
-      <a href="{% url 'store:update' u.id %}">Update</a> /
-      <form action="/store/delete/{{ u.id }}/" method="post" id="formdelete">
-        {% csrf_token %}
-        <a href="#" onclick="document.getElementById('formdelete').submit()"
-          >Delete</a
-        >
-      </form>
-    </td>
-  </tr>
-  {% endfor %}
-</table> -->
-<ul class="nav nav-tabs">
+  <ul class="nav nav-tabs">
   <li class="nav-item">
     <a class="nav-link active" href="{% url 'store:filter' 'All'  %}">All</a>
   </li>
   {% for cat in category %}
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'store:filter' cat %}"> {{cat}}</a>
+    <a class="nav-link" href="{% url 'store:filter' cat %}">
+      {{cat}}</a>
   </li>
   {%endfor%}
-  <!-- <li class="nav-item">
-    <a class="nav-link" href="{% url 'store:filter' 'Nike' %}">{{cat}}</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
-  </li> -->
+
 </ul>
 <table class="table table-striped">
   <thead>
