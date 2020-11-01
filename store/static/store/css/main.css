@@ -56,3 +56,15 @@ li {
 .sidebar-link:hover {
     background-color: #344450;
 }
+
+.change-action {
+    cursor: pointer;
+    color: #205067;
+}
+.change-action:hover {
+    text-decoration: underline;
+}
+
+.address-tab {
+    width: 250px;
+}
