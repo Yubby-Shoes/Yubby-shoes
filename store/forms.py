@@ -1,10 +1,19 @@
-from django.forms import ModelForm
+from django import forms
 
-from .models import Product
+from .models import Product, OrderItem
 
 
-class ProductInfoModelForm(ModelForm):
+class ProductInfoModelForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'discounted_price',
                   'image', 'in_stock', 'product_model', 'category', 'company']
+
+
+class OrderStatusUpdateForm(forms.ModelForm):
+    # order_status = forms.CharField(widget=forms.Select(attrs={}))
+
+    class Meta:
+        model = OrderItem
+        fields = ['order_status', ]
+
