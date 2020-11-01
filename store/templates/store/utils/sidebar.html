@@ -12,7 +12,7 @@
       <ul class="sidebar-links-wrapper">
         <li class="sidebar-link
             {% if 'filter' in request.path %}active{% endif %}">
-          <a href="{% url 'store:filter' category='all' %}">Products</a>
+          <a href="{% url 'store:filter' category='All' %}">Products</a>
         </li>
         <li class="sidebar-link
 {% if 'order' in request.path %}active{% endif %}">
