@@ -1,0 +1,32 @@
+{% load static %}
+
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-header-title p-3">
+      <h1 class="text-danger">Yubby shoes</h1>
+      <p class="text-white">One place for all Requirements</p>
+    </div>
+  </div>
+  <div class="sidebar-content pt-3">
+    <div class="sidebar-links">
+      <ul class="sidebar-links-wrapper">
+        <li class="sidebar-link
+            {% if 'filter' in request.path %}active{% endif %}">
+          <a href="{% url 'store:filter' category='all' %}">Products</a>
+        </li>
+        <li class="sidebar-link
+{% if 'order' in request.path %}active{% endif %}">
+          <a href="#">Orders</a>
+        </li>
+        <li class="sidebar-link
+{% if 'create' in request.path %}active{% endif %}">
+          <a href="{% url 'store:create' %}">Create</a>
+        </li>
+        <li class="sidebar-link">
+          <a href="{% url 'accounts:logout' %}">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'store/css/main.css' %}">
+{% endblock styles %}
+
+{% block content %}
+
+  <div class="container-fluid row p-0 m-0 store-wrapper">
+    <div class="col-2 p-0 m-0 ">
+      {% include 'store/utils/sidebar.html' %}
+    </div>
+    <div class="content-wrapper col-10 p-0 m-0">
+      {% block main-content %}
+      {% endblock %}
+    </div>
+  </div>
+
+{% endblock content %}

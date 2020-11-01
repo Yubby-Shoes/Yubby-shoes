@@ -34,7 +34,7 @@ class Create(CreateView):
 @method_decorator(login_required, name='dispatch')
 class Detail(DetailView):
     template_name = 'store/detail.html'
-    context_object_name = 'user_obj'
+    context_object_name = 'product'
     model = Product
 
 
@@ -58,7 +58,7 @@ class Delete(DeleteView):
 
 @login_required()
 def filter_products_bycategory(request, category):
-    if (category == 'All'):
+    if category == 'All' or category == 'all':
         products = Product.objects.all()
     else:
         products = Product.objects.filter(
