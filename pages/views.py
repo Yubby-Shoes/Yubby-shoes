@@ -50,11 +50,15 @@ def item_detail(request, pk):
     if request.method == 'GET':
         item = get_object_or_404(Product, pk=pk)
         products = Product.objects.all()
-        start_item = randint(1, len(products)-3)
+        if len(products) > 4:
+            start_item = randint(1, len(products)-3)
+            featured_products = products[start_item: start_item+3]
+        else:
+            featured_products = products
         # print('start_item', start_item)
         context = {
             'product': item,
-            'featured_products': products[start_item: start_item+3],
+            'featured_products': featured_products,
             'categories': get_categories()
         }
         return render(request, 'pages/shop-single.html', context=context)
