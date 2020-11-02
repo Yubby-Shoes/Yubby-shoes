@@ -7,11 +7,11 @@ class Login(LoginView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            return redirect('store:list')
+            return redirect('store:filter ')
         return self.render_to_response(self.get_context_data())
 
     def get_success_url(self):
-        return reverse("store:list")
+        return reverse("store:filter", kwargs={'category': 'All'})
 
 
 class Logout(LogoutView):
