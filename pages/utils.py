@@ -10,3 +10,14 @@ class Util:
             to=[data['to_email']]
         )
         email.send()
+
+
+# To send email use following format
+
+# email_body = 'Hello, Your customer has ordered following shoes'
+# data = {
+#     'email_body': email_body,
+#     'to_email': store_email,
+#     'email_subject': 'Customer order {{product_info}}'
+# }
+# Util.send_email(data)
