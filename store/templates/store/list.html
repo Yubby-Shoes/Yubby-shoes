@@ -20,41 +20,45 @@
   {%endfor%}
 
 </ul>
-<table class="table table-striped">
+<table class="table table-striped table-responsive-md">
   <thead>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Product Name</th>
       <th scope="col">Price</th>
+      <th scope="col"></th>
       <th scope="col">Product Model</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
-  {% for u in data %}
+
   <tbody>
-    <tr class="align-items-center">
-      <th scope="row">{{ u.id }}</th>
-      <td><img src="{{ u.image.url }}" alt="product_image"
+    {% for u in data %}
+      <tr>
+        <th scope="row">{{ u.id }}</th>
+        <td><img src="{{ u.image.url }}" alt="product_image"
                class="rounded-circle mr-2"
                height="30"
                width="30"
       >{{ u.name }}</td>
       <td>{{ u.price }}</td>
-      <td>{{ u.product_model}}</td>
+      <td>{{ u.product_model }}</td>
       <td>
         <a href="{% url 'store:detail' u.id %}">Detail</a> /
         <a href="{% url 'store:update' u.id %}">Update</a> /
         <form action="/store/delete/{{ u.id }}/" class="d-inline-block"
-              method="post" id="formdelete">
+              method="post" id="formdelete{{ u.id }}">
           {% csrf_token %}
-          <a href="#" onclick="document.getElementById('formdelete').submit()"
+          <a href="#" onclick="document.getElementById('formdelete{{ u.id }}')
+              .submit()"
             >Delete</a
           >
         </form>
       </td>
-    </tr>
-  </tbody>
-  {% endfor %}
+      </tr>
+    {% endfor %}
+    </tbody>
+
 </table>
 
 {% endblock %}

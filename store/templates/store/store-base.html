@@ -3,18 +3,59 @@
 
 {% block styles %}
   <link rel="stylesheet" href="{% static 'store/css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
 {% endblock styles %}
 
 {% block content %}
 
   <div class="container-fluid row p-0 m-0 store-wrapper">
-    <div class="col-2 p-0 m-0 ">
+    <div class="col-lg-2 p-0 m-0 d-none d-lg-block">
       {% include 'store/utils/sidebar.html' %}
     </div>
-    <div class="content-wrapper col-10 p-0 m-0">
+    <div id="sidebar-responsive" class="responsive d-block d-lg-none">
+      <div class="responsive-sidebar-wrapper">
+        <div class="menu-wrapper" id="menu-wrapper" onclick="toggleSidebar()">
+          <span class="fa fa-bars text-white fa-2x" id="menu-bar-icon"></span>
+          <span class="fa fa-close text-white fa-2x"
+                id="close-menu-icon"></span>
+        </div>
+        {% include 'store/utils/sidebar.html' %}
+      </div>
+    </div>
+    <div class="content-wrapper col-12 col-lg-10 p-0 m-0">
       {% block main-content %}
       {% endblock %}
     </div>
   </div>
+
+  <script>
+      const sidebar = document.getElementById('sidebar-responsive');
+      const menuBarIcon = document.getElementById('menu-bar-icon');
+      const closeMenuIcon = document.getElementById('close-menu-icon');
+      const menuWrapper = document.getElementById('menu-wrapper');
+
+      let isOpen = false;
+
+      menuBarIcon.style.display = 'block';
+      closeMenuIcon.style.display = 'none';
+
+      const toggleSidebar = () => {
+          if (isOpen) {
+              console.log('close')
+              sidebar.classList.remove('open');
+              menuBarIcon.style.display = 'block';
+              closeMenuIcon.style.display = 'none';
+              menuWrapper.classList.remove('open');
+              isOpen = !isOpen;
+          } else {
+              console.log('open')
+              sidebar.classList.add('open');
+              menuBarIcon.style.display = 'none';
+              closeMenuIcon.style.display = 'block';
+              menuWrapper.classList.add('open');
+              isOpen = !isOpen;
+          }
+      }
+  </script>
 
 {% endblock content %}

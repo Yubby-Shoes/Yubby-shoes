@@ -17,8 +17,9 @@
       <th scope="col">Action</th>
     </tr>
     </thead>
+
+    <tbody>
     {% for order in orders %}
-      <tbody>
       <tr>
         <th scope="row">{{ order.id }}</th>
         <td><img src="{{ order.product.image.url }}" alt="product_image"
@@ -36,18 +37,7 @@
         {% else %}
           --
         {% endif %}</td>
-      <td class='address-tab'>{{ order.order_address }}</td>
-        {#      <td>#}
-        {#        <a href="{% url 'store:detail' u.id %}">Detail</a> /#}
-        {#        <a href="{% url 'store:update' u.id %}">Update</a> /#}
-        {#        <form action="/store/delete/{{ u.id }}/" class="d-inline-block"#}
-        {#              method="post" id="formdelete">#}
-        {#          {% csrf_token %}#}
-        {#          <a href="#" onclick="document.getElementById('formdelete').submit()"#}
-        {#            >Delete</a#}
-        {#          >#}
-        {#        </form>#}
-        {#      </td>#}
+        <td class='address-tab'>{{ order.order_address }}</td>
         <td>{{ order.get_order_status_display }}</td>
         <td>
           <div onclick="openAction({{ order.id }})" class="change-action"
@@ -56,12 +46,11 @@
           </div>
           <div id="form-{{ order.id }}" style="display:none">
             <form action="{% url 'store:order-status-update' pk=order.id %}"
-{#                  class="d-inline-block"#}
+                {#                  class="d-inline-block"#}
                   method="post" id="formDelete{{ order.id }}">
               {% csrf_token %}
               {% for field in update_form %}
                 {{ field.errors }}
-{#                {{ field }}#}
                 <select name="{{ field.name }}">
                   {% for choice in field.field.choices %}
                     <option value="{{ choice.0 }}"
@@ -81,26 +70,27 @@
               <a href="#" class="text-muted"
                  onclick=
                      "closeAction({{ order.id }})"
-              >Cancel</a
-              >
+              >Cancel</a>
             </form>
           </div>
         </td>
       </tr>
-      </tbody>
     {% endfor %}
+    </tbody>
+
   </table>
 {% endblock main-content %}
 
 {% block scripts %}
   <script>
-    function openAction(actionId) {
-        document.getElementById('change-'+actionId).style.display = 'none';
-        document.getElementById('form-' + actionId).style.display = 'block';
-    }
-    function closeAction(actionId) {
-        document.getElementById('change-'+actionId).style.display = 'block';
-        document.getElementById('form-' + actionId).style.display = 'none';
-    }
+      function openAction(actionId) {
+          document.getElementById('change-' + actionId).style.display = 'none';
+          document.getElementById('form-' + actionId).style.display = 'block';
+      }
+
+      function closeAction(actionId) {
+          document.getElementById('change-' + actionId).style.display = 'block';
+          document.getElementById('form-' + actionId).style.display = 'none';
+      }
   </script>
 {% endblock scripts %}
