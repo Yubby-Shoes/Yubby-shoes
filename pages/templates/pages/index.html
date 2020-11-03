@@ -104,7 +104,7 @@
       {% for category in categories %}
         <li class="d-block py-2 px-3 border-right">
           <a href="{% url 'pages:shop' %}?category={{ category.id }}"
-             class="text-capitalize"
+             class="text-capitalize text-dark"
              id="underline-link"
           >{{ category.category_name }}</a>
         </li>
