@@ -17,3 +17,11 @@ class OrderStatusUpdateForm(forms.ModelForm):
         model = OrderItem
         fields = ['order_status', ]
 
+    def save(self, commit=True):
+        print(self.instance.product.in_stock)
+        print(self.instance.order_status)
+        if self.instance.product.in_stock > 0:
+            if self.instance.order_status == 'PR':
+                self.instance.product.in_stock -= self.object.order_quantity
+                self.instance.product.save()
+        return super().save()
