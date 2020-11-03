@@ -48,7 +48,7 @@ def filter_products_bycategory(request, category):
         products = Product.objects.all()
     else:
         products = Product.objects.filter(
-            category__category_name__contains=category)
+                category__category_name__contains=category)
     return render(request, 'store/list.html', context={
         'data': products,
         "category": Category.objects.all()
@@ -78,4 +78,28 @@ class OrderStatusUpdateView(UpdateView):
 
     def get_queryset(self):
         return OrderItem.objects.all()
+
+    # def form_valid(self, form):
+    #     print(self.object.product)
+    #     print(self.object.product.in_stock)
+    #     print(self.object.order_status)
+    #     if self.object.product.in_stock > 0:
+    #         if self.object.order_status == 'PR':
+    #             self.object.product.in_stock -= self.object.order_quantity
+    #
+    #     return super().form_valid(form)
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         if self.object.product.in_stock > 0:
+    #             if self.object.order_status == 'SH':
+    #                 self.object.product.in_stock -= self.object.order_quantity
+    #
+    #                 self.object.product.save()
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
 
