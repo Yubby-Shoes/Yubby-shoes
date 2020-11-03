@@ -9,7 +9,10 @@
   <!-- Breadcrumb -->
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="index.html">Home</a>
+      <a href="{% url 'pages:index' %}">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'pages:shop' %}">Shop</a>
     </li>
     <li class="breadcrumb-item active">{{ product.name }}</li>
   </ol>
@@ -28,10 +31,16 @@
                 class="text-muted">Filter</span></h3>
             <ul class="w3layouts-box-list">
               {% for category in categories %}
-              <li>
-                <input type="checkbox" class="checked">
-                <span class="span">{{ category.category_name }}</span>
-              </li>
+                <li
+                >
+                  <a href="{% url 'pages:shop' %}?category={{ category.id }}"
+                     class="text-muted"
+                  >
+                    <span class="span text-capitalize">
+                      {{ category.category_name }}
+                    </span>
+                  </a>
+                </li>
               {% endfor %}
             </ul>
           </div>
@@ -55,7 +64,13 @@
                               {% endif %}
                             </span></h5>
               <div class="available mt-3">
-                <span><a href="#">login to save in wishlist </a></span>
+                <span class="text-uppercase">
+                  {% if product.in_stock > 0 %}
+                    In Stock: {{ product.in_stock }}
+                  {% else %}
+                    <strong>Out Of Stock</strong>
+                  {% endif %}
+                </span>
                 <p>Lorem Ipsum has been the industry's standard since the 1500s.
                   Praesent ullamcorper dui turpis.. </p>
               </div>

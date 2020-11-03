@@ -13,7 +13,7 @@
   <!---->
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="index.html">Home</a>
+      <a href="{% url 'pages:index' %}">Home</a>
     </li>
     <li class="breadcrumb-item active">Shop</li>
   </ol>
@@ -77,26 +77,21 @@
                   </div>
                   <div class="item-info-product">
                     <h4>
-                      <a href="shop-single.html">{{ product.name }}</a>
+                      <a href="{% url 'pages:item_detail' product.id %}"
+                      >{{ product.name }}</a>
                     </h4>
 
                     <div class="product_price">
-                      <div class="grid-price">
+                      <div class="grid-price text-center mb-1">
                         <span class="money">${{ product.price }}</span>
                       </div>
+                      <div class="btn-group">
+                        <a href="{% url 'pages:buy' product.id %}"
+                           class="fancy-button secondary mr-1">View</a>
+                        <a href="{% url 'pages:buy' product.id %}"
+                           class="fancy-button">Buy</a>
+                      </div>
                     </div>
-                    <ul class="stars">
-                      <li><a href="#"><span class="fa fa-star"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star-half-o"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star-half-o"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star-o"
-                                            aria-hidden="true"></span></a></li>
-                    </ul>
                   </div>
                 </div>
               </div>
@@ -129,7 +124,7 @@
           </div>
           <div class="grid-img-right mt-4 text-right">
             <span class="money">Flat 50% Off</span>
-            <a href="shop-single.html" class="btn">Shop Now</a>
+            <a href="{% url 'pages:shop' %}" class="btn">Shop Now</a>
           </div>
         </div>
       </div>

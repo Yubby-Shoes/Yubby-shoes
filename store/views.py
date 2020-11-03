@@ -1,25 +1,11 @@
 from django.shortcuts import render, reverse
-from django.contrib.auth.decorators import login_required
-from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-from .forms import ProductInfoModelForm
-from .models import Product, Category
+from django.urls import reverse_lazy
+from django.views.generic import (CreateView, ListView, DetailView, UpdateView,
+                                  DeleteView)
+from .forms import ProductInfoModelForm, OrderStatusUpdateForm
+from .models import Product, Category, OrderItem
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-# @login_required()
-# def products_view(request):
-#     # this context is passed for statusapp
-#     # messages = StatusMessage.objects.filter(user=request.user)
-#     products = Product.objects.all()
-#     return render(request, 'store/store.html', {
-#         'products': products
-#     })
-
-
-# @method_decorator(login_required, name='dispatch')
-# class List(ListView):
-#     template_name = 'store/list.html'
-#     model = Product
-#     context_object_name = 'data'
 
 
 @method_decorator(login_required, name='dispatch')
@@ -62,8 +48,58 @@ def filter_products_bycategory(request, category):
         products = Product.objects.all()
     else:
         products = Product.objects.filter(
-            category__category_name__contains=category)
+                category__category_name__contains=category)
     return render(request, 'store/list.html', context={
         'data': products,
         "category": Category.objects.all()
     })
+
+
+@method_decorator(login_required, name='dispatch')
+class Orders(ListView):
+    template_name = 'store/order.html'
+    model = OrderItem
+    context_object_name = 'orders'
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        data = super().get_context_data()
+        data['update_form'] = OrderStatusUpdateForm()
+        return data
+
+
+@method_decorator(login_required, name='dispatch')
+class OrderStatusUpdateView(UpdateView):
+    template_name = 'store/order.html'
+    success_url = reverse_lazy('store:orders')
+    form_class = OrderStatusUpdateForm
+
+    def get_queryset(self):
+        return OrderItem.objects.all()
+
+    # def form_valid(self, form):
+    #     print(self.object.product)
+    #     print(self.object.product.in_stock)
+    #     print(self.object.order_status)
+    #     if self.object.product.in_stock > 0:
+    #         if self.object.order_status == 'PR':
+    #             self.object.product.in_stock -= self.object.order_quantity
+    #
+    #     return super().form_valid(form)
+
+    # def post(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #
+    #     form = self.get_form()
+    #     if form.is_valid():
+    #         if self.object.product.in_stock > 0:
+    #             if self.object.order_status == 'SH':
+    #                 self.object.product.in_stock -= self.object.order_quantity
+    #
+    #                 self.object.product.save()
+    #         return self.form_valid(form)
+    #     else:
+    #         return self.form_invalid(form)
+

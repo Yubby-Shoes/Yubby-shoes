@@ -1,56 +1,69 @@
 {% extends "store/store-base.html" %}
 
 {% block main-content %}
-<h1>List of all Products</h1>
+  <h1>List of all Products</h1>
 
 
   <ul class="nav nav-tabs">
-  <li class="nav-item">
-    <a class="nav-link active" href="{% url 'store:filter' 'All'  %}">All</a>
-  </li>
-  {% for cat in category %}
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'store:filter' cat %}">
-      {{cat}}</a>
-  </li>
-  {%endfor%}
+    <li class="nav-item">
+      <a class="nav-link
+{% if 'All' in request.path or 'all' in request.path %} active{% endif %}"
+         href="{% url 'store:filter' 'All' %}">All</a>
+    </li>
+    {% for cat in category %}
+      <li class="nav-item">
+        <a class="nav-link {% if cat.category_name in request.path %} active
+    {% endif %}"
+           href="{% url 'store:filter' cat %}">
+          {{ cat }}</a>
+      </li>
+    {% endfor %}
 
-</ul>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Product Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">Product Model</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  {% for u in data %}
-  <tbody>
-    <tr class="align-items-center">
-      <th scope="row">{{ u.id }}</th>
-      <td><img src="{{ u.image.url }}" alt="product_image"
-               class="rounded-circle mr-2"
-               height="30"
-               width="30"
-      >{{ u.name }}</td>
-      <td>{{ u.price }}</td>
-      <td>{{ u.product_model}}</td>
-      <td>
-        <a href="{% url 'store:detail' u.id %}">Detail</a> /
-        <a href="{% url 'store:update' u.id %}">Update</a> /
-        <form action="/store/delete/{{ u.id }}/" class="d-inline-block"
-              method="post" id="formdelete">
-          {% csrf_token %}
-          <a href="#" onclick="document.getElementById('formdelete').submit()"
-            >Delete</a
-          >
-        </form>
-      </td>
-    </tr>
-  </tbody>
-  {% endfor %}
-</table>
+  </ul>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">In Stock</th>
+        <th scope="col">Price</th>
+        <th scope="col">Product Model</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for u in data %}
+        <tr>
+          <th scope="row">{{ u.id }}</th>
+          <td><img src="{{ u.image.url }}" alt="product_image"
+                   class="rounded-circle mr-2"
+                   height="30"
+                   width="30"
+          >{{ u.name }}</td>
+          <td>{{ u.in_stock }}</td>
+          <td>{{ u.price }}</td>
+          <td>{{ u.product_model }}</td>
+          <td>
+            <a href="{% url 'store:detail' u.id %}">Detail</a> /
+            <a href="{% url 'store:update' u.id %}">Update</a> /
+            <form action="/store/delete/{{ u.id }}/" class="d-inline-block"
+                  method="post" id="formdelete{{ u.id }}">
+              {% csrf_token %}
+              <a href="#"
+                 onclick="document.getElementById('formdelete{{ u.id }}')
+                     .submit()"
+              >Delete</a
+              >
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+
+    </table>
+  </div>
 
 {% endblock %}

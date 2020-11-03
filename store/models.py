@@ -39,6 +39,21 @@ class Product(models.Model):
     def __str__(self):
         return self.product_model + '-' + self.name
 
+    def save(self, *args, **kwargs):
+        super().save()
+        from PIL import Image
+        original_img = Image.open(self.image.path)
+        width, height = original_img.size
+        if (width < height):
+            x = 0
+            y = (height - width) / 2
+            cropped_img = original_img.crop((x, y, width + x, width + y))
+        else:
+            x = (width - height) / 2
+            y = 0
+            cropped_img = original_img.crop((x, y, height + x, height + y))
+        cropped_img.save(self.image.path)
+
 
 class OrderItem(models.Model):
     STATUS_CHOICES = (
@@ -59,4 +74,3 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.order_name}-{self.product.name}"
-
