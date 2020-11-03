@@ -13,7 +13,7 @@
   <!---->
   <ol class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="index.html">Home</a>
+      <a href="{% url 'pages:index' %}">Home</a>
     </li>
     <li class="breadcrumb-item active">Shop</li>
   </ol>
@@ -81,22 +81,12 @@
                     </h4>
 
                     <div class="product_price">
-                      <div class="grid-price">
+                      <div class="grid-price d-flex align-items-center justify-content-between">
                         <span class="money">${{ product.price }}</span>
+                        <a href="{% url 'pages:buy' product.id %}"
+                           class="fancy-button">Buy</a>
                       </div>
                     </div>
-                    <ul class="stars">
-                      <li><a href="#"><span class="fa fa-star"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star-half-o"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star-half-o"
-                                            aria-hidden="true"></span></a></li>
-                      <li><a href="#"><span class="fa fa-star-o"
-                                            aria-hidden="true"></span></a></li>
-                    </ul>
                   </div>
                 </div>
               </div>

@@ -128,7 +128,8 @@
               </div>
               <div class="item-info-product">
                 <h4>
-                  <a href="shop-single.html">{{ product.name }}</a>
+                  <a href="{% url 'pages:item_detail' product.id %}"
+                  >{{ product.name }}</a>
                 </h4>
 
                 <div class="product_price">
