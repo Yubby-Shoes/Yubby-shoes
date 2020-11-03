@@ -129,15 +129,14 @@
               <a
                 class="btn text-white btn-primary {% if not products.has_previous %} disabled {% endif %}"
                 {%if products.has_previous %}
-                href="{% url 'pages:shop' %}?page={{ products.previous_page_number }}&&category={{ request.GET.category }}"
+                href="?page={{ products.previous_page_number }}&&category={{ request.GET.category }}"
                 {% endif %}
                 >Previous</a
               >
               <a
                 class="btn text-white btn-primary {% if not products.has_next %} disabled {% endif %}"
                 {% if products.has_next %}
-                href="{% url 'pages:shop' %}?page=
-{{ products.next_page_number }}&&category={{ request.GET.category }}"
+                href="?page={{ products.next_page_number }}&&category={{ request.GET.category }}"
                 {% endif %}
                 >Next</a
               >
