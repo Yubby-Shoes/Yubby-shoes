@@ -134,8 +134,12 @@
 
                 <div class="product_price">
                   <div
-                      class="grid-price d-flex justify-content-between align-items-center">
+                      class="grid-price text-center">
                     <span class="money pl-4">${{ product.price }}</span>
+                  </div>
+                  <div>
+                    <a href="{% url 'pages:item_detail' product.id %}"
+                       class="fancy-button secondary">View</a>
                     <a href="{% url 'pages:buy' product.id %}"
                        class="fancy-button">Buy</a>
                   </div>

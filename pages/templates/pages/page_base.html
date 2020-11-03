@@ -3,13 +3,13 @@
 
 {% block styles %}
   <style>
-  a#underline-link:hover{
-      text-decoration: underline;
-  }
+      a#underline-link:hover {
+          text-decoration: underline;
+      }
 
-  .fancy-button {
+      .fancy-button {
+          box-sizing: border-box;
           outline: none;
-          border: none;
           cursor: pointer;
           font-size: 15px;
           color: #fff;
@@ -23,11 +23,25 @@
           -moz-transition: all 0.3s;
           transition: all 0.3s;
           border-radius: 0;
-        }
-    .fancy-button:hover {
-        color: white;
-        text-decoration: none;
-    }
+          border: 2px solid black;
+      }
+
+      .fancy-button.secondary {
+          background: transparent;
+          color: black;
+      }
+
+      .fancy-button.secondary:hover {
+          color: white;
+          background: black;
+          text-decoration: none;
+      }
+
+      .fancy-button:hover {
+          color: black;
+          background: transparent;
+          text-decoration: none;
+      }
 
   </style>
   <script>
