@@ -77,12 +77,17 @@
                   </div>
                   <div class="item-info-product">
                     <h4>
-                      <a href="shop-single.html">{{ product.name }}</a>
+                      <a href="{% url 'pages:item_detail' product.id %}"
+                      >{{ product.name }}</a>
                     </h4>
 
                     <div class="product_price">
-                      <div class="grid-price d-flex align-items-center justify-content-between">
+                      <div class="grid-price text-center mb-1">
                         <span class="money">${{ product.price }}</span>
+                      </div>
+                      <div class="btn-group">
+                        <a href="{% url 'pages:buy' product.id %}"
+                           class="fancy-button secondary mr-1">View</a>
                         <a href="{% url 'pages:buy' product.id %}"
                            class="fancy-button">Buy</a>
                       </div>
@@ -119,7 +124,7 @@
           </div>
           <div class="grid-img-right mt-4 text-right">
             <span class="money">Flat 50% Off</span>
-            <a href="shop-single.html" class="btn">Shop Now</a>
+            <a href="{% url 'pages:shop' %}" class="btn">Shop Now</a>
           </div>
         </div>
       </div>
