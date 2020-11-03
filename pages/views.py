@@ -28,7 +28,8 @@ def index(request):
 
 def shop(request):
     if request.method == 'GET':
-        products = Product.objects.all().order_by('-date_added')
+        products = Product.objects.filter(
+            category__category_name__startswith="men").order_by('-date_added')
         cg = request.GET.get('category')
 
         if cg:
@@ -41,7 +42,7 @@ def shop(request):
         paginated_products = p.get_page(page_no)
         return render(request, 'pages/shop.html', context={
             'products': paginated_products,
-            'categories': get_categories()
+            'categories': Category.objects.filter(category_name__startswith="men")
         })
     return HttpResponseNotAllowed('Methods Other than get not allowed!')
 
