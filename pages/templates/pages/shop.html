@@ -59,11 +59,9 @@
             </ul>
           </div>
           <!-- // preference -->
-
-
-        </div>
-        <!-- //product left -->
-        <!-- product right -->
+         </div>
+        <!-- //product left
+        product right -->
         <div class="left-ads-display col-lg-9">
           <div class="row">
             {% for product in products %}
@@ -77,54 +75,55 @@
                   </div>
                   <div class="item-info-product">
                     <h4>
-                      <a href="{% url 'pages:item_detail' product.id %}"
-                      >{{ product.name }}</a>
+                      <a href="shop-single.html">{{ product.name }}</a>
                     </h4>
 
                     <div class="product_price">
-                      <div class="grid-price text-center mb-1">
+                      <div class="grid-price">
                         <span class="money">${{ product.price }}</span>
                       </div>
-                      <div class="btn-group">
-                        <a href="{% url 'pages:buy' product.id %}"
-                           class="fancy-button secondary mr-1">View</a>
-                        <a href="{% url 'pages:buy' product.id %}"
-                           class="fancy-button">Buy</a>
-                      </div>
                     </div>
+                    <ul class="stars">
+                      <li><a href="#"><span class="fa fa-star"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star-half-o"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star-half-o"
+                                            aria-hidden="true"></span></a></li>
+                      <li><a href="#"><span class="fa fa-star-o"
+                                            aria-hidden="true"></span></a></li>
+                    </ul>
                   </div>
                 </div>
               </div>
             {% endfor %}
             <div class="col-md-4 offset-md-8">
-              <!-- pagination -->
-              <div class="btn-group mt-3 float-right">
-                <a class="btn text-white btn-primary
-                        {% if not products.has_previous %}
-                          disabled
-                        {% endif %}"
-                    {% if products.has_previous %}
-                   href="{% url 'pages:shop' %}?page={{ products.previous_page_number }}&&category={{ request.GET.category }}"
-                    {% endif %}
-                >Previous</a>
-                <a class="btn text-white btn-primary
-                        {% if not products.has_next %}
-                          disabled
-                        {% endif %}"
-                    {% if products.has_next %}
-                   href="{% url 'pages:shop' %}?page=
-{{ products.next_page_number }}&&category={{ request.GET.category }}"
-                    {% endif %}
-                >Next</a>
-              </div>
-              {#            <p><span class="text-muted align-self-center">Page {{ products.number }} of#}
-              {#                {{ products.paginator.num_pages }}</span></p>#}
-              <!-- // pagination -->
+               <!-- pagination -->
+            <div class="btn-group mt-3 float-right">
+              <a
+                class="btn text-white btn-primary {% if not products.has_previous %} disabled {% endif %}"
+                {%if products.has_previous %}
+                href="?page={{ products.previous_page_number }}&&category={{ request.GET.category }}"
+                {% endif %}
+                >Previous</a
+              >
+              <a
+                class="btn text-white btn-primary {% if not products.has_next %} disabled {% endif %}"
+                {% if products.has_next %}
+                href="?page={{ products.next_page_number }}&&category={{ request.GET.category }}"
+                {% endif %}
+                >Next</a
+              >
+            </div>
+
+            <!-- // pagination -->
             </div>
           </div>
           <div class="grid-img-right mt-4 text-right">
             <span class="money">Flat 50% Off</span>
-            <a href="{% url 'pages:shop' %}" class="btn">Shop Now</a>
+            <a href="shop-single.html" class="btn">Shop Now</a>
           </div>
         </div>
       </div>

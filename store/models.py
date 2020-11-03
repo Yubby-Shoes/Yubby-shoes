@@ -29,6 +29,7 @@ class Product(models.Model):
                               upload_to='media/products')
     date_added = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
+    is_new_arrival = models.BooleanField(default=False)
     in_stock = models.IntegerField(default=0)
     product_model = models.CharField(max_length=10, unique=True)
     category = models.ForeignKey(

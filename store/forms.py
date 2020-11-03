@@ -7,7 +7,7 @@ class ProductInfoModelForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'discounted_price',
-                  'image', 'in_stock', 'product_model', 'category', 'company']
+                  'image', 'in_stock', 'product_model', 'category', 'company', 'is_new_arrival']
 
 
 class OrderStatusUpdateForm(forms.ModelForm):
@@ -24,3 +24,4 @@ class OrderStatusUpdateForm(forms.ModelForm):
                 self.instance.product.in_stock -= self.instance.order_quantity
                 self.instance.product.save()
         return super().save()
+
