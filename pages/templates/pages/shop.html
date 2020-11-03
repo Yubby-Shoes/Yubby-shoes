@@ -20,34 +20,31 @@
     <div class="row">
       <!-- product left -->
       <div class="side-bar col-lg-3">
-        {#
-        <div class="search-bar w3layouts-newsletter">
-          #} {#
-          <h3 class="sear-head">Search Here..</h3>
-          #} {#
-          <form action="#" method="post" class="d-flex">
-            #} {#
-            <input
-              type="search"
-              placeholder="Product name..."
-              name="search"
-              #}
-              {#
-              class="form-control"
-              required=""
-            />#} {#
-            <button class="btn1">
-              <span
-                class="fa fa-search"
-                #}
-                {#
-                aria-hidden="true"
-              ></span></button
-            >#} {#
-          </form>
-          #} {#
-        </div>
-        #}
+{#        <div class="search-bar w3layouts-newsletter">#}
+{#          #} {##}
+{#          <h3 class="sear-head">Search Here..</h3>#}
+{#          #} {##}
+{#          <form action="#" method="post" class="d-flex">#}
+{#            #} {##}
+{#            <input#}
+{#              type="search"#}
+{#              placeholder="Product name..."#}
+{#              name="search"#}
+{#              #}
+{#              class="form-control"#}
+{#              required=""#}
+{#            />#} {##}
+{#            <button class="btn1">#}
+{#              <span#}
+{#                class="fa fa-search"#}
+{#                #}
+{#                aria-hidden="true"#}
+{#              ></span></button#}
+{#            >#} {##}
+{#          </form>#}
+{#          #} {##}
+{#        </div>#}
+{#        #}
         <!--preference -->
         <div class="left-side my-4">
           <h3 class="sear-head d-flex justify-content-between">
@@ -59,15 +56,9 @@
             <li>
               <a
                 href="{{ request.path }}?category={{ category.id }}"
-                {%
-                if
-                category.id|to_str
-                !="request.GET.category"
-                %}
+                {% if category.id|to_str != "request.GET.category" %}
                 class="text-muted"
-                {%
-                endif
-                %}
+                {% endif %}
               >
                 <span class="span text-capitalize"
                   >{{ category.category_name }}</span
@@ -137,38 +128,21 @@
             <div class="btn-group mt-3 float-right">
               <a
                 class="btn text-white btn-primary {% if not products.has_previous %} disabled {% endif %}"
-                {%
-                if
-                products.has_previous
-                %}
+                {%if products.has_previous %}
                 href="{% url 'pages:shop' %}?page={{ products.previous_page_number }}&&category={{ request.GET.category }}"
-                {%
-                endif
-                %}
+                {% endif %}
                 >Previous</a
               >
               <a
                 class="btn text-white btn-primary {% if not products.has_next %} disabled {% endif %}"
-                {%
-                if
-                products.has_next
-                %}
+                {% if products.has_next %}
                 href="{% url 'pages:shop' %}?page=
 {{ products.next_page_number }}&&category={{ request.GET.category }}"
-                {%
-                endif
-                %}
+                {% endif %}
                 >Next</a
               >
             </div>
-            {#
-            <p>
-              <span class="text-muted align-self-center"
-                >Page {{ products.number }} of#} {# {{
-                products.paginator.num_pages }}</span
-              >
-            </p>
-            #}
+
             <!-- // pagination -->
           </div>
         </div>

@@ -57,9 +57,11 @@ def shop_women(request):
             products = category.product_set.all().order_by('-date_added')
             # print(products)
 
-        p = Paginator(products, 9)
+        p = Paginator(products, 9, allow_empty_first_page=True)
         page_no = request.GET.get('page', 1)
+        print(page_no)
         paginated_products = p.get_page(page_no)
+        # print(paginated_products.previous_page_number())
         return render(request, 'pages/shop.html', context={
             'products': paginated_products,
             'categories': Category.objects.filter(category_name__startswith="women")
