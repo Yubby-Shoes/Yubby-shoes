@@ -30,7 +30,8 @@ li {
 
 .responsive {
     position: fixed;
-    left: -270px;
+    width: 40%;
+    left: -40%;
     top: 0;
     bottom: 0;
     z-index: 99;
