@@ -28,7 +28,8 @@ def index(request):
 
 def shop(request):
     if request.method == 'GET':
-        products = Product.objects.all().order_by('-date_added')
+        products = Product.objects.filter(
+            category__category_name__startswith="men").order_by('-date_added')
         cg = request.GET.get('category')
 
         if cg:
@@ -41,7 +42,30 @@ def shop(request):
         paginated_products = p.get_page(page_no)
         return render(request, 'pages/shop.html', context={
             'products': paginated_products,
-            'categories': get_categories()
+            'categories': Category.objects.filter(category_name__startswith="men")
+        })
+    return HttpResponseNotAllowed('Methods Other than get not allowed!')
+
+
+def shop_women(request):
+    if request.method == 'GET':
+        products = Product.objects.filter(
+            category__category_name__startswith="women").order_by('-date_added')
+        cg = request.GET.get('category')
+
+        if cg:
+            category = get_object_or_404(Category, pk=cg)
+            products = category.product_set.all().order_by('-date_added')
+            # print(products)
+
+        p = Paginator(products, 9, allow_empty_first_page=True)
+        page_no = request.GET.get('page', 1)
+        print(page_no)
+        paginated_products = p.get_page(page_no)
+        # print(paginated_products.previous_page_number())
+        return render(request, 'pages/shop.html', context={
+            'products': paginated_products,
+            'categories': Category.objects.filter(category_name__startswith="women")
         })
     return HttpResponseNotAllowed('Methods Other than get not allowed!')
 

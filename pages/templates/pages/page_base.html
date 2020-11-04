@@ -3,9 +3,46 @@
 
 {% block styles %}
   <style>
-  a#underline-link:hover{
-      text-decoration: underline;
-  }
+      a#underline-link:hover {
+          text-decoration: underline;
+      }
+
+      .fancy-button {
+          box-sizing: border-box;
+          outline: none;
+          cursor: pointer;
+          font-size: 15px;
+          color: #fff;
+          padding: 8px 30px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          display: inline-block;
+          background: #212529;
+          font-weight: 700;
+          -webkit-transition: all 0.3s;
+          -moz-transition: all 0.3s;
+          transition: all 0.3s;
+          border-radius: 0;
+          border: 2px solid black;
+      }
+
+      .fancy-button.secondary {
+          background: transparent;
+          color: black;
+      }
+
+      .fancy-button.secondary:hover {
+          color: white;
+          background: black;
+          text-decoration: none;
+      }
+
+      .fancy-button:hover {
+          color: black;
+          background: transparent;
+          text-decoration: none;
+      }
+
   </style>
   <script>
       addEventListener("load", function () {
@@ -19,13 +56,13 @@
   <!-- //Meta tag Keywords -->
 
   <!-- Custom-Files -->
-  <link rel="stylesheet" href={% static "css/bootstrap.css" %}>
+  <link rel="stylesheet" href='{% static "css/bootstrap.css" %}'>
   <!-- Bootstrap-Core-CSS -->
-  <link rel="stylesheet" href={% static "css/style.css" %} type="text/css"
+  <link rel="stylesheet" href='{% static "css/style.css" %}' type="text/css"
         media="all"/>
   <!-- Style-CSS -->
   <!-- font-awesome-icons -->
-  <link href={% static "css/font-awesome.css" %} rel="stylesheet">
+  <link href='{% static "css/font-awesome.css" %}' rel="stylesheet">
   <!-- //font-awesome-icons -->
   <!-- /Fonts -->
   <link

@@ -26,8 +26,47 @@ li {
 .sidebar {
     background-color: #425766;
     height: 100vh;
-
 }
+
+.responsive {
+    position: fixed;
+    width: 40%;
+    left: -40%;
+    top: 0;
+    bottom: 0;
+    z-index: 99;
+    transition: ease 0.2s;
+}
+.responsive.open {
+    left: 0;
+ }
+
+.responsive .responsive-sidebar-wrapper {
+    position: relative;
+    transition: ease 0.2s;
+}
+
+ .menu-wrapper {
+     position: absolute;
+     bottom:0;
+     /*top:0;*/
+     left: 100%;
+     z-index: 999;
+     color: white;
+     background-color: #205067;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width: 65px;
+     height: 65px;
+     border-radius: 50%;
+     transition: ease 0.2s;
+ }
+
+ .menu-wrapper.open {
+     top: 0;
+     transition: ease 0.2s;
+ }
 
 .sidebar-header {
     padding: 5px;
