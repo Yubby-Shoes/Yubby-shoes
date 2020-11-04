@@ -113,12 +113,13 @@
                   </div>
                   <div class="item-info-product">
                     <h4>
-                      <a href="shop-single.html">{{ p.name }}</a>
+                      <a href="{% url 'pages:item_detail' p.id %}"
+                      >{{ p.name }}</a>
                     </h4>
 
                     <div class="product_price">
                       <div class="grid-price">
-                        <span class="money">${{ p.price }}</span>
+                        <span class="money">Rs. {{ p.price }}</span>
                       </div>
                     </div>
                   </div>
