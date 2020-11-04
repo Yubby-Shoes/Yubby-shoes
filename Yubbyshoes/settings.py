@@ -25,7 +25,8 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['159.65.146.204', '127.0.0.1',
+                 'www.khusishoes.com', 'khusishoes.com']
 
 INTERNAL_IPS = ['127.0.0.1', ]
 
@@ -82,8 +83,12 @@ WSGI_APPLICATION = 'Yubbyshoes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'yubbydb',
+        'USER': 'yubby_admin',
+        'PASSWORD': '.,mnbvcxz',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -126,15 +131,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = '/assets/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+STATIC_ROOT = STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# To avoid transmitting the CSRF cookie, session cookie over HTTP accidentally.
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # email settings
 # EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
