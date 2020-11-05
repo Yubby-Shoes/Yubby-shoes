@@ -78,8 +78,10 @@
                 <div class="product-shoe-info shoe text-center">
                   <div class="men-thumb-item">
                     {% if product.image %}
-                      <img src='{{ product.image.url }}' class="img-fluid"
-                           alt="">
+                      <a href="{% url 'pages:item_detail' product.id %}">
+                        <img src='{{ product.image.url }}' class="img-fluid"
+                             alt="">
+                      </a>
                     {% endif %}
                   </div>
                   <div class="item-info-product">
@@ -127,7 +129,7 @@
           </div>
           <div class="grid-img-right mt-4 text-right">
             <span class="money">Flat 50% Off</span>
-            <a href="shop-single.html" class="btn">Shop Now</a>
+            <a href="{% url 'pages:shop' %}" class="btn">Shop Now</a>
           </div>
         </div>
       </div>

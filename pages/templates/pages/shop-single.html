@@ -115,7 +115,9 @@
                 <div class="product-shoe-info shoe text-center">
                   <div class="men-thumb-item">
                     {% if p.image %}
-                      <img src='{{ p.image.url }}' class="img-fluid" alt="">
+                      <a href="{% url 'pages:item_detail' p.id %}">
+                        <img src='{{ p.image.url }}' class="img-fluid" alt="">
+                      </a>
                     {% endif %}
                     <span class="product-new-top">New</span>
                   </div>

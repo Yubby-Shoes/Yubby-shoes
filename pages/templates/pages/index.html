@@ -127,7 +127,9 @@
             <div class="product-shoe-info shoe text-center">
               <div class="men-thumb-item">
                 {% if product.image %}
-                  <img src="{{ product.image.url }}" class="img-fluid" alt="">
+                  <a href="{% url 'pages:item_detail' product.id %}">
+                    <img src="{{ product.image.url }}" class="img-fluid" alt="">
+                  </a>
                 {% endif %}
                 <span class="product-new-top">New</span>
               </div>
@@ -159,13 +161,13 @@
           </a>
         </div>
       </div>
-{#      <div class="d-flex">#}
-{#        <div class="justify-content-center">#}
-{#          <a href="{% url 'pages:shop' %}" class="text-center visit-shop-link">#}
-{#            Visit our shop#}
-{#          </a>#}
-{#        </div>#}
-{#      </div>#}
+      {#      <div class="d-flex">#}
+      {#        <div class="justify-content-center">#}
+      {#          <a href="{% url 'pages:shop' %}" class="text-center visit-shop-link">#}
+      {#            Visit our shop#}
+      {#          </a>#}
+      {#        </div>#}
+      {#      </div>#}
 
     </div>
   </section>
@@ -282,16 +284,16 @@
   <!-- brands -->
   {% include 'pages/utils/footer.html' %}
   <script>
-  const colors = ['5e72e4', '0eafcc', '0da5c0', '2dce89', 'fb6340', 'f5365c',
-      '27272C', '1f38c5', 'B1210C'];
-  const getRandomColor = () => {
-      return colors[Math.floor(Math.random() * colors.length)]
-  }
-  window.onload = () => {
-  const chips = document.querySelectorAll('.chip')
-  for (let i = 0; i < chips.length; i++){
-      chips[i].style.backgroundColor = '#' + getRandomColor();
-  }
-  }
+      const colors = ['5e72e4', '0eafcc', '0da5c0', '2dce89', 'fb6340', 'f5365c',
+          '27272C', '1f38c5', 'B1210C'];
+      const getRandomColor = () => {
+          return colors[Math.floor(Math.random() * colors.length)]
+      }
+      window.onload = () => {
+          const chips = document.querySelectorAll('.chip')
+          for (let i = 0; i < chips.length; i++) {
+              chips[i].style.backgroundColor = '#' + getRandomColor();
+          }
+      }
   </script>
 {% endblock content %}
