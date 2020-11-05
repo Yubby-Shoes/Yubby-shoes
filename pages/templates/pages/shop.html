@@ -97,7 +97,7 @@
                       <div class="btn-group">
                         <a href="{% url 'pages:item_detail' product.id %}"
                            class="fancy-button secondary mr-1">View</a>
-                        <a href="{% url 'pages:buy' product.id %}"
+                        <a href="{% url 'pages:buy' product.id %}#fill-details"
                            class="fancy-button">Buy</a>
                       </div>
                     </div>
@@ -137,5 +137,13 @@
   </section>
   <!-- //contact -->
   {% include 'pages/utils/footer.html' %}
+  <script>
+      addEventListener("load", function () {
+          setTimeout(hideURLbar, 0);
+      }, false);
 
+      function hideURLbar() {
+          window.scrollTo(0, 1);
+      }
+  </script>
 {% endblock content %}

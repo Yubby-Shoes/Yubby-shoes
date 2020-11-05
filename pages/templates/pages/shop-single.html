@@ -81,7 +81,7 @@
               </div>
               <div>
                 <a class="fancy-button" id="buy-link"
-                   href="{% url 'pages:buy' product.id %}">Buy</a>
+                   href="{% url 'pages:buy' product.id %}#fill-details">Buy</a>
               </div>
             </div>
           </div>
@@ -143,4 +143,13 @@
   </section>
   <!-- //contact -->
   {% include 'pages/utils/footer.html' %}
+  <script>
+      addEventListener("load", function () {
+          setTimeout(hideURLbar, 0);
+      }, false);
+
+      function hideURLbar() {
+          window.scrollTo(0, 1);
+      }
+  </script>
 {% endblock content %}
