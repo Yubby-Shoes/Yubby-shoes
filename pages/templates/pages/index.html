@@ -12,8 +12,8 @@
           <div id="logo">
             <h1><a href="{% url 'pages:index' %}" class="pt-1">
               <img src="{% static 'core/logo/pages_logo.svg' %}"
-                 height="60"
-                 alt="KhusiShoes">
+                   height="60"
+                   alt="KhusiShoes">
             </a>
             </h1>
           </div>
@@ -33,10 +33,11 @@
     <!-- //header -->
     <!--/banner-->
     <div class="banner-info">
-      <h3 class="mb-4">Casual Shoes for Men and Women</h3>
+      <h3 class="mb-4">Shop <br>
+        Casual Shoes for Men and Women</h3>
       <div class="ban-buttons">
-        <a href="{% url 'pages:shop' %}" class="btn">Shop Now</a>
-        <a href="{% url 'pages:about' %}" class="btn active">Read More</a>
+        <a href="{% url 'pages:shop' %}" class="btn">For Men</a>
+        <a href="{% url 'pages:shop_women' %}" class="btn active">For Women</a>
       </div>
     </div>
     <!--// banner-inner -->
