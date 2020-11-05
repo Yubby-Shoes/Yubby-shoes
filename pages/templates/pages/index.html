@@ -105,9 +105,9 @@
   <!--Category -->
   <section class="container bg-grey p-3">
     <h3 class="mb-3 text-uppercase">Categories</h3>
-    <ul class="d-flex py-0">
+    <ul class="d-flex flex-wrap py-0">
       {% for category in categories %}
-        <li class="d-block py-1 px-1">
+        <li class="d-flex flex-wrap py-1 px-1">
           <a href="{% url 'pages:shop' %}?category={{ category.id }}"
              class="text-capitalize chip"
              id="underline-link"
