@@ -42,11 +42,15 @@
       {% for u in data %}
         <tr>
           <th scope="row">{{ u.id }}</th>
-          <td><img src="{{ u.image.url }}" alt="product_image"
+          <td>
+            {% if u.image %}
+              <img src="{{ u.image.url }}" alt="product_image"
                    class="rounded-circle mr-2"
                    height="30"
                    width="30"
-          >{{ u.name }}</td>
+              >
+            {% endif %}
+            {{ u.name }}</td>
           <td>{{ u.in_stock }}</td>
           <td>{{ u.price }}</td>
           <td>{{ u.product_model }}</td>
