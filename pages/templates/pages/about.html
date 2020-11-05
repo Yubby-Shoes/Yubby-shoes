@@ -1,5 +1,9 @@
 {% extends 'pages/page_base.html' %}
 
+{% block title %}
+  About |
+{% endblock title %}
+
 {% block content %}
   <!-- mian-content -->
     <div class="main-banner inner" id="home">
@@ -298,4 +302,13 @@
     </section>
     <!-- brands -->
     {% include 'pages/utils/footer.html' %}
+  <script>
+      addEventListener("load", function () {
+          setTimeout(hideURLbar, 0);
+      }, false);
+
+      function hideURLbar() {
+          window.scrollTo(0, 1);
+      }
+  </script>
 {% endblock content %}

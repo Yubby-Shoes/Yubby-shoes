@@ -1,6 +1,10 @@
 {% extends "store/store-base.html" %}
 {% load static %}
 
+{% block store_title %}
+  {{ product.name }} |
+{% endblock store_title %}
+
 {% block main-content %}
   <div class="container-fluid">
     <div class="col-12 col-md-6 offset-2">

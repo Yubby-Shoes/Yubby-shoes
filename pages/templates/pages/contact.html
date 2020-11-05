@@ -1,5 +1,9 @@
 {% extends 'pages/page_base.html' %}
 
+{% block title %}
+  Contact |
+{% endblock title %}
+
 {% block content %}
   <!-- mian-content -->
     <div class="main-banner inner" id="home">
@@ -18,7 +22,9 @@
     <!-- banner -->
     <section class="ab-info-main py-5">
         <div class="container py-3">
-            <h3 class="tittle text-center"><span class="sub-tittle">Find Us</span> Contact Us</h3>
+            <h3 class="tittle text-center"><span
+                class="sub-tittle">Find
+              Us</span> Contact Us</h3>
             <div class="row contact-main-info mt-5">
                 <div class="col-md-6 contact-right-content">
                     <form action="#" method="post">
@@ -57,7 +63,13 @@
 
             </div>
             <div class="map-fo mt-lg-5 mt-4">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d423286.27404345275!2d-118.69191921441556!3d34.02016130939095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c75ddc27da13%3A0xe22fdf6f254608f4!2sLos+Angeles%2C+CA%2C+USA!5e0!3m2!1sen!2sin!4v1522474296007" allowfullscreen></iframe>
+
+              <iframe src="https://maps.google.com/maps?q=butwal%20khushi%20complex&t=&z=13&ie=UTF8&iwloc=&output=embed" allowfullscreen></iframe>
+
+
+
+
+
             </div>
         </div>
     </section>
@@ -65,4 +77,13 @@
 
     <!-- //contact -->
     {% include 'pages/utils/footer.html' %}
+  <script>
+      addEventListener("load", function () {
+          setTimeout(hideURLbar, 0);
+      }, false);
+
+      function hideURLbar() {
+          window.scrollTo(0, 1);
+      }
+  </script>
 {% endblock content%}
