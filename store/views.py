@@ -62,7 +62,7 @@ class Orders(ListView):
     context_object_name = 'orders'
 
     def get_queryset(self):
-        return self.model.objects.all()
+        return self.model.objects.all().order_by('-ordered_on')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         data = super().get_context_data()
