@@ -51,19 +51,11 @@ class UserDetailForm(forms.Form):
             c.address = customer_address
             c.phone_number = customer_phone
             c.save()
-        # if not customer_with_phone:
-        #     c = self.customer_model()
-        #     c.name = customer_name
-        #     c.address = customer_address
-        #     c.phone_number = customer_phone
-        #     c.save()
+
         order_item.customer = c
         order_item.product = product
-        order_item.order_name = customer_name
-        order_item.order_address = customer_address
         order_item.order_email = self.cleaned_data['email']
         order_item.order_quantity = self.cleaned_data['quantity']
-        order_item.order_phone = customer_phone
         order_item.save()
 
         return order_item
