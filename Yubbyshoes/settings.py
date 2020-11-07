@@ -83,12 +83,8 @@ WSGI_APPLICATION = 'Yubbyshoes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'yubbydb',
-        'USER': 'yubby_admin',
-        'PASSWORD': '.,mnbvcxz',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -130,9 +126,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-STATIC_ROOT = STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
+STATIC_ROOT = '/assets/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

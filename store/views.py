@@ -6,6 +6,8 @@ from .forms import ProductInfoModelForm, OrderStatusUpdateForm
 from .models import Product, Category, OrderItem
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_http_methods
+from accounts.models import Customer
 
 
 @method_decorator(login_required, name='dispatch')
@@ -48,7 +50,7 @@ def filter_products_bycategory(request, category):
         products = Product.objects.all()
     else:
         products = Product.objects.filter(
-                category__category_name__contains=category)
+            category__category_name__contains=category)
     return render(request, 'store/list.html', context={
         'data': products,
         "category": Category.objects.all()
@@ -68,6 +70,38 @@ class Orders(ListView):
         data = super().get_context_data()
         data['update_form'] = OrderStatusUpdateForm()
         return data
+
+
+@login_required()
+@require_http_methods(["GET"])
+def customers_view(request):
+    customers = Customer.objects.all()
+    # pn = request.GET.get('phone_number')
+
+    # if pn:
+    #     customers = get_object_or_404(Category, phone_number=pn)
+    #     # print(products)
+
+    return render(request, 'store/customer.html', context={
+        'customers': customers,
+        'shoe_sizes': [39, 40, 41, 42, 43]
+    })
+
+
+@login_required()
+@require_http_methods(["POST"])
+def customers_update(request, pk):
+    customers = Customer.objects.all()
+    # pn = request.GET.get('phone_number')
+
+    # if pn:
+    #     customers = get_object_or_404(Category, phone_number=pn)
+    #     # print(products)
+
+    return render(request, 'store/customer.html', context={
+        'customers': customers,
+        'sizes': [39, 40, 41, 42, 43]
+    })
 
 
 @method_decorator(login_required, name='dispatch')
@@ -102,4 +136,3 @@ class OrderStatusUpdateView(UpdateView):
     #         return self.form_valid(form)
     #     else:
     #         return self.form_invalid(form)
-
