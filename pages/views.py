@@ -1,8 +1,11 @@
 from random import randint
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseNotAllowed, Http404
+from django.urls import reverse_lazy
 from django.core.paginator import Paginator
+
 from store.models import *
+from .utils import Util
 from .forms import UserDetailForm
 
 
@@ -96,13 +99,49 @@ def about(request):
 def buy(request, pk):
     buy_detail_form = UserDetailForm()
     product = get_object_or_404(Product, pk=pk)
+    is_ordered = False
+
     # print(product)
     if request.method == 'POST':
         buy_detail_form = UserDetailForm(request.POST)
         if buy_detail_form.is_valid():
-            buy_detail_form.save(pk)
+            is_ordered = True
+            order = buy_detail_form.save(pk)
+            # email
+            name = buy_detail_form.cleaned_data['full_name']
+            address = buy_detail_form.cleaned_data['address']
+            phone_number = buy_detail_form.cleaned_data['phone_number']
+            email = buy_detail_form.cleaned_dat.get('email', '')
+            order_link = reverse_lazy('store:orders')
+            email_body = f"""
+Hello, we have a new order from {name} for {order.product.name} on 
+{order.ordered_on}.
+    Name: {name}
+    Phone Number: {phone_number}
+    Email: {email}
+    Address: {address}
+
+For more details check the url {order_link}
+"""
+            email_to = 'some_email@gmail.com'
+            subject = 'New Order!!'
+
+            email_data = {
+                'email_body': email_body,
+                'to_email': email_to,
+                'email_subject': subject
+            }
+
+            Util.send_email(email_data)
+
             buy_detail_form = UserDetailForm()
+        return render(request, 'pages/buy.html', context={
+                    'is_ordered': is_ordered,
+                    'buy_detail_form': buy_detail_form,
+                    'product': product
+                })
     return render(request, 'pages/buy.html', context={
+        'is_ordered': is_ordered,
         'buy_detail_form': buy_detail_form,
         'product': product
     })

@@ -19,6 +19,26 @@
   </ol>
   <!---->
   <!--// mian-content -->
+
+  <!-- OrderPlacement Alert -->
+  {% if is_ordered %}
+    <div class="container mt-4">
+      <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Order Placed!</h4>
+        <p class="text-dark">Your Order has successfully been placed! You will
+          get a call from
+          our management team soon for order verification and sizes.</p>
+        <hr>
+        <p class="mb-0 text-dark"><strong>Thank you</strong> for shopping
+          with us! Keep shopping Visit shop <a href=
+                                                  "{% url 'pages:shop' %}">from here.
+          &rarr;</a>
+        </p>
+      </div>
+    </div>
+  {% endif %}
+  <!-- // OrderPlacement Alert -->
+
   <!-- banner -->
   <section class="ab-info-main py-5">
     <div class="container py-3">
