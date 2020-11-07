@@ -96,13 +96,22 @@ def about(request):
 def buy(request, pk):
     buy_detail_form = UserDetailForm()
     product = get_object_or_404(Product, pk=pk)
+    is_ordered = False
+
     # print(product)
     if request.method == 'POST':
         buy_detail_form = UserDetailForm(request.POST)
         if buy_detail_form.is_valid():
             buy_detail_form.save(pk)
+            is_ordered = True
             buy_detail_form = UserDetailForm()
+        return render(request, 'pages/buy.html', context={
+                    'is_ordered': is_ordered,
+                    'buy_detail_form': buy_detail_form,
+                    'product': product
+                })
     return render(request, 'pages/buy.html', context={
+        'is_ordered': is_ordered,
         'buy_detail_form': buy_detail_form,
         'product': product
     })
