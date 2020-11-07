@@ -67,10 +67,7 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                 related_name='orders')
     customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
-    order_name = models.CharField(max_length=255)
-    order_address = models.CharField(max_length=255)
     order_email = models.CharField(max_length=255, blank=True, null=True)
-    order_phone = models.CharField(max_length=14)
     order_quantity = models.IntegerField()
     order_status = models.CharField(max_length=3, choices=STATUS_CHOICES,
                                     default='PR')
