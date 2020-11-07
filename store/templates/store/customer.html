@@ -34,12 +34,12 @@
         <div class="form-row align-items-center">
           <div class="col-auto my-1">
             <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-            <select name = 'size' class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+            <select name = 'default_size' class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                 {% for size in shoe_sizes %}
                 {% if cust.default_size == size%}
                 <option selected value={{size}}>{{size}}</option>
                 {% else %}
-                <option value={{cust.default_size}}>{{size}}</option>
+                <option value={{size}}>{{size}}</option>
                 {% endif %}
                 {% endfor %}
             </select>

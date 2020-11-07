@@ -1,8 +1,8 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, ListView, DetailView, UpdateView,
                                   DeleteView)
-from .forms import ProductInfoModelForm, OrderStatusUpdateForm
+from .forms import ProductInfoModelForm, OrderStatusUpdateForm, CustomerUpdateForm
 from .models import Product, Category, OrderItem
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -91,17 +91,32 @@ def customers_view(request):
 @login_required()
 @require_http_methods(["POST"])
 def customers_update(request, pk):
-    customers = Customer.objects.all()
-    # pn = request.GET.get('phone_number')
+    customer = Customer.objects.get(id=pk)
+    form = CustomerUpdateForm(request.POST, instance=customer)
+    # customer.default_size =
+    if form.is_valid():
+        print("form is valid")
+        print(form.cleaned_data)
+        form.save()
+    return redirect("store:customers")
+#     # pn = request.GET.get('phone_number')
 
-    # if pn:
-    #     customers = get_object_or_404(Category, phone_number=pn)
-    #     # print(products)
+#     # if pn:
+#     #     customers = get_object_or_404(Category, phone_number=pn)
+#     #     # print(products)
 
-    return render(request, 'store/customer.html', context={
-        'customers': customers,
-        'sizes': [39, 40, 41, 42, 43]
-    })
+#     return render(request, 'store/customer.html', context={
+#         'customers': customers,
+#         'sizes': [39, 40, 41, 42, 43]
+#     })
+# @method_decorator(login_required, name='dispatch')
+# class CustomerUpdateView(UpdateView):
+#     template_name = 'store/customer.html'
+#     success_url = reverse_lazy('store:customers')
+#     form_class = CustomerUpdateForm
+
+#     def get_queryset(self):
+#         return Customer.objects.all()
 
 
 @method_decorator(login_required, name='dispatch')
