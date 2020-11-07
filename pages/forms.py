@@ -1,9 +1,11 @@
 from django import forms
 from store.models import OrderItem, Product
+from accounts.models import Customer
 from django.shortcuts import get_object_or_404
 
 
 class UserDetailForm(forms.Form):
+    customer_model = Customer
     full_name = forms.CharField(max_length=255)
     phone_number = forms.CharField(max_length=15)
     email = forms.EmailField(required=False)
@@ -37,11 +39,31 @@ class UserDetailForm(forms.Form):
     def save(self, product_id):
         product = get_object_or_404(Product, pk=product_id)
         order_item = OrderItem()
+        customer_with_phone = self.customer_model.objects.all()
+        customer_phone = self.cleaned_data['phone_number']
+        customer_name = self.cleaned_data['full_name']
+        customer_address = self.cleaned_data['address']
+        try:
+            _ = customer_with_phone.get(phone_number=customer_phone)
+        except customer_with_phone.model.DoesNotExist:
+            c = self.customer_model()
+            c.name = customer_name
+            c.address = customer_address
+            c.phone_number = customer_phone
+            c.save()
+        # if not customer_with_phone:
+        #     c = self.customer_model()
+        #     c.name = customer_name
+        #     c.address = customer_address
+        #     c.phone_number = customer_phone
+        #     c.save()
         order_item.product = product
-        order_item.order_name = self.cleaned_data['full_name']
-        order_item.order_address = self.cleaned_data['address']
+        order_item.order_name = customer_name
+        order_item.order_address = customer_address
         order_item.order_email = self.cleaned_data['email']
         order_item.order_quantity = self.cleaned_data['quantity']
-        order_item.order_phone = self.cleaned_data['phone_number']
+        order_item.order_phone = customer_phone
         order_item.save()
+
         return order_item
+
