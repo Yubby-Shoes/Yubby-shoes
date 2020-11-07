@@ -1,0 +1,55 @@
+{% extends 'store/store-base.html' %}
+<!-- #fdfd -->
+{% block store_title %} Customers | {%endblock store_title %}
+<!-- sdfsd -->
+{% block main-content %}
+<h1>Customers</h1>
+<table class="table table-striped table-responsive-xl">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Phone NUmber</th>
+      <th scope="col">Address</th>
+      <th scope="col">Size</th>
+
+      <!-- <th scope="col">Quantity</th>
+          <th scope="col">Price</th>
+          <th scope="col">Contact</th>
+          <th scope="col">Client</th>
+          <th scope="col">Client Email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for cust in customers %}
+    <tr>
+      <td>{{ cust.name }}</td>
+      <td>{{ cust.phone_number }}</td>
+      <td>{{ cust.address }}</td>
+      <td><form action="{% url 'store:customers_update' cust.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-row align-items-center">
+          <div class="col-auto my-1">
+            <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+            <select name = 'size' class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                {% for size in shoe_sizes %}
+                {% if cust.default_size == size%}
+                <option selected value={{size}}>{{size}}</option>
+                {% else %}
+                <option value={{cust.default_size}}>{{size}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+          </div>
+          <div class="col-auto my-1">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div></form>
+        </td> 
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock main-content %}
