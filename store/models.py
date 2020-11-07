@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import Customer
 
 
 class Category(models.Model):
@@ -65,6 +66,7 @@ class OrderItem(models.Model):
     ordered_on = models.DateTimeField(auto_now_add=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                 related_name='orders')
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
     order_name = models.CharField(max_length=255)
     order_address = models.CharField(max_length=255)
     order_email = models.CharField(max_length=255, blank=True, null=True)
