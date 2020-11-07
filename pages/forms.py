@@ -44,7 +44,7 @@ class UserDetailForm(forms.Form):
         customer_name = self.cleaned_data['full_name']
         customer_address = self.cleaned_data['address']
         try:
-            _ = customer_with_phone.get(phone_number=customer_phone)
+            c = customer_with_phone.get(phone_number=customer_phone)
         except customer_with_phone.model.DoesNotExist:
             c = self.customer_model()
             c.name = customer_name
@@ -57,6 +57,7 @@ class UserDetailForm(forms.Form):
         #     c.address = customer_address
         #     c.phone_number = customer_phone
         #     c.save()
+        order_item.customer = c
         order_item.product = product
         order_item.order_name = customer_name
         order_item.order_address = customer_address
