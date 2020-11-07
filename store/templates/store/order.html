@@ -34,15 +34,15 @@
         >{{ order.product.name }}</td>
         <td>{{ order.order_quantity }}</td>
         <td>{{ order.product.price|multiply:order.order_quantity }}</td>
-        <td>{{ order.order_phone }}</td>
+        <td>{{ order.customer.phone_number }}</td>
 
-        <td>{{ order.order_name }}</td>
+        <td>{{ order.customer.name }}</td>
         <td>{% if order.order_email %}
           {{ order.order_email }}
         {% else %}
           --
         {% endif %}</td>
-        <td class='address-tab'>{{ order.order_address }}</td>
+        <td class='address-tab'>{{ order.customer.address }}</td>
         <td>{{ order.get_order_status_display }}</td>
         <td>
           <div onclick="openAction({{ order.id }})" class="change-action"
