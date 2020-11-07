@@ -1,9 +1,11 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, get_object_or_404
+from django.views.decorators.http import require_http_methods
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, ListView, DetailView, UpdateView,
                                   DeleteView)
 from .forms import ProductInfoModelForm, OrderStatusUpdateForm
 from .models import Product, Category, OrderItem
+from accounts.models import Customer
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -48,7 +50,7 @@ def filter_products_bycategory(request, category):
         products = Product.objects.all()
     else:
         products = Product.objects.filter(
-                category__category_name__contains=category)
+            category__category_name__contains=category)
     return render(request, 'store/list.html', context={
         'data': products,
         "category": Category.objects.all()
@@ -68,6 +70,21 @@ class Orders(ListView):
         data = super().get_context_data()
         data['update_form'] = OrderStatusUpdateForm()
         return data
+
+
+@login_required
+@require_http_methods(["GET"])
+def CustomersView(request):
+    phone_number = request.GET.get('phone_number')
+    customers = Customer.objects.all()
+    if phone_number:
+        customers = get_object_or_404(Customers, phone_number=phone_number)
+    return render(request, 'store/customers.html', context={
+        'customers': customers
+    })
+
+# @method_decorator(login_required, name='dispatch')
+# def customers_update_view(request):
 
 
 @method_decorator(login_required, name='dispatch')
@@ -102,4 +119,3 @@ class OrderStatusUpdateView(UpdateView):
     #         return self.form_valid(form)
     #     else:
     #         return self.form_invalid(form)
-
