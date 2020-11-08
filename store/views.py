@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_list_or_404
 from django.urls import reverse_lazy
 from django.views.generic import (CreateView, ListView, DetailView, UpdateView,
                                   DeleteView)
@@ -76,12 +76,10 @@ class Orders(ListView):
 @require_http_methods(["GET"])
 def customers_view(request):
     customers = Customer.objects.all()
-    # pn = request.GET.get('phone_number')
+    pn = request.GET.get('phone_number')
 
-    # if pn:
-    #     customers = get_object_or_404(Category, phone_number=pn)
-    #     # print(products)
-
+    if pn:
+        customers = get_list_or_404(Customer, phone_number=int(pn))
     return render(request, 'store/customer.html', context={
         'customers': customers,
         'shoe_sizes': [39, 40, 41, 42, 43]
