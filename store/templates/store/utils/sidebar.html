@@ -5,27 +5,39 @@
     <div class="sidebar-header-title p-3">
       <div class="header-logo-wrapper text-center">
         <a href="{% url 'pages:index' %}">
-          <img src="{% static 'core/logo/logo_hor.svg' %}" alt="KhusiShoes"
-               width="100">
+          <img
+            src="{% static 'core/logo/logo_hor.svg' %}"
+            alt="KhusiShoes"
+            width="100"
+          />
         </a>
       </div>
-      <p class="text-center store-tagline">Every step of yours is our
-        responsibility</p>
+      <p class="text-center store-tagline">
+        Every step of yours is our responsibility
+      </p>
     </div>
   </div>
   <div class="sidebar-content pt-3">
     <div class="sidebar-links">
       <ul class="sidebar-links-wrapper">
-        <li class="sidebar-link
-            {% if 'filter' in request.path %}active{% endif %}">
+        <li
+          class="sidebar-link {% if 'filter' in request.path %}active{% endif %}"
+        >
           <a href="{% url 'store:filter' category='All' %}">Products</a>
         </li>
-        <li class="sidebar-link
-{% if 'order' in request.path %}active{% endif %}">
+        <li
+          class="sidebar-link {% if 'order' in request.path %}active{% endif %}"
+        >
           <a href="{% url 'store:orders' %}">Orders</a>
         </li>
-        <li class="sidebar-link
-{% if 'create' in request.path %}active{% endif %}">
+        <li
+          class="sidebar-link {% if 'customers' in request.path %}active{% endif %}"
+        >
+          <a href="{% url 'store:customers' %}">Customers</a>
+        </li>
+        <li
+          class="sidebar-link {% if 'create' in request.path %}active{% endif %}"
+        >
           <a href="{% url 'store:create' %}">Create</a>
         </li>
         <li class="sidebar-link">
@@ -33,6 +45,5 @@
         </li>
       </ul>
     </div>
-
   </div>
 </div>
