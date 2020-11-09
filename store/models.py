@@ -73,4 +73,4 @@ class OrderItem(models.Model):
                                     default='PR')
 
     def __str__(self):
-        return f"{self.order_name}-{self.product.name}"
+        return f"{self.product.name}"

@@ -111,7 +111,7 @@ def buy(request, pk):
             name = buy_detail_form.cleaned_data['full_name']
             address = buy_detail_form.cleaned_data['address']
             phone_number = buy_detail_form.cleaned_data['phone_number']
-            email = buy_detail_form.cleaned_dat.get('email', '')
+            email = buy_detail_form.cleaned_data.get('email', '')
             order_link = reverse_lazy('store:orders')
             email_body = f"""
 Hello, we have a new order from {name} for {order.product.name} on 
@@ -123,7 +123,7 @@ Hello, we have a new order from {name} for {order.product.name} on
 
 For more details check the url {order_link}
 """
-            email_to = 'some_email@gmail.com'
+            email_to = 'stevejobs2053@gmail.com','anjalbam81@gmail.com'
             subject = 'New Order!!'
 
             email_data = {
